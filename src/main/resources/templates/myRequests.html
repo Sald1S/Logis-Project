@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<body layout:fragment="mainContent">
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/page-header.jpg');">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h2>My requests</h2>
+                        <p>Here you can manage with all your requests</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li>My Requests</li>
+                </ol>
+            </div>
+        </nav>
+    </div><!-- End Breadcrumbs -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Addresser name</th>
+                        <th>Receiver name</th>
+                        <th>Delivery Address</th>
+                        <th>Product name</th>
+                        <th>Manager</th>
+                        <th style="width: 10%">Request status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="req : ${myRequests}">
+                        <td th:text="${req.id}"></td>
+                        <td th:text="${req.getAddresser().getAddresser_name()}"></td>
+                        <td th:text="${req.getReceiver().getReceiver_name()}"></td>
+                        <td th:text="${req.getReceiver().getReceiver_city()}"></td>
+                        <td th:text="${req.getProduct().getName()}"></td>
+                        <td th:each="man : ${req.getManager()}" th:text="${man.getFullName()}"></td>
+                        <td th:text="${req.getRequestStatus()}"></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</main><!-- End #main -->
+
+</body>
+
+</html>

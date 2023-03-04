@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<body layout:fragment="mainContent">
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/page-header.jpg');">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h2 th:text="#{login.login}"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ol>
+                    <li><a th:href="@{'/'}" th:text="#{nav.home}"></a></li>
+                    <li th:text="#{login.login}"></li>
+                </ol>
+            </div>
+        </nav>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Login Section ======= -->
+    <section id="get-a-quote" class="get-a-quote">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row g-0">
+
+                <div class="col-lg-7 mx-auto">
+
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${param.passwordError!=null}">
+                        Passwords are not same!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <form th:action="@{'/enter'}" method="post" class="input-group">
+                        <div class="row">
+
+                            <h3 class="mx-auto" th:text="#{login.login}"></h3>
+
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <input type="email" class="form-control" name="user_email" >
+                                <label class="form-label" th:text="#{login.emailAddress}"></label>
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <input type="password" class="form-control" name="user_password">
+                                <label class="form-label" th:text="#{login.password}"></label>
+                            </div>
+
+                            <div class="col-md-12 text-center">
+                                <button class="btn btn-primary btn-block mb-4" th:text="#{login.signin}"></button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div><!-- End Quote Form -->
+
+            </div>
+
+        </div>
+    </section><!-- End Get a Quote Section -->
+
+</main><!-- End #main -->
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<div class="container-fluid container-xl d-flex align-items-center justify-content-between"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+    <a href="/" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>Logis</h1>
+    </a>
+
+    <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+    <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+    <nav id="navbar" class="navbar">
+        <ul>
+            <li><a href="services.html" th:text="#{nav.services}"></a></li>
+            <li><a th:href="@{'/calc'}" th:text="#{nav.calculator}"></a></li>
+            <li class="dropdown"><a href="#" th:text="#{language.lang}"><i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                <ul class="dropdown">
+                    <li><a th:href="@{'?lang=en'}">English</a></li>
+                    <li><a th:href="@{'?lang=ru'}">Русский</a></li>
+                </ul>
+            </li>
+            <li sec:authorize="isAnonymous()" class="dropdown"><a href="#"><span th:text="#{nav.authorize}"></span> <i
+                    class="bi bi-chevron-down dropdown-indicator"></i></a>
+                <ul>
+                    <li><a sec:authorize="isAnonymous()" th:href="@{'/signin'}" th:text="#{nav.login}"></a></li>
+                    <li><a sec:authorize="isAnonymous()" th:href="@{'/signup'}" th:text="#{nav.signup}"></a></li>
+                </ul>
+            </li>
+            <li sec:authorize="isAuthenticated()" class="dropdown"><a th:href="@{'/profile'}" th:text="${#authentication.principal.full_name}"><i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                <ul>
+                    <li><a sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{'/admin'}" th:text="#{nav.admin}"></a></li>
+                    <li><a sec:authorize="hasAnyRole('ROLE_USER')" th:href="@{'/myRequests'}" th:text="#{nav.myrequests}"></a></li>
+                    <li><a sec:authorize="isAuthenticated()" th:href="@{'/exit'}" th:text="#{nav.logout}"></a></li>
+                </ul>
+            </li>
+            <li><a class="get-a-quote" th:href="@{'/addRequest'}" sec:authorize="isAuthenticated()" th:text="#{nav.makeanorder}"></a></li>
+        </ul>
+    </nav><!-- .navbar -->
+</div>
+

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<body layout:fragment="mainContent">
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/page-header.jpg');">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h2>Get a Quote</h2>
+                        <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas
+                            consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione
+                            sint. Sit quaerat ipsum dolorem.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li>Make an order</li>
+                </ol>
+            </div>
+        </nav>
+    </div><!-- End Breadcrumbs -->
+
+    <div class="container text-center mt-3 mb-4">
+        <h3 class="mb-3" th:text="#{make.makeanorder}"></h3>
+    </div>
+
+    <!-- ======= Get a Quote Section ======= -->
+    <div id="get-a-quote" class="get-a-quote">
+
+        <div class="container" data-aos="fade-up">
+            <div class="row g-0">
+                <div class="col-lg-12 input-group">
+                    <form>
+                        <div class="row gy-4">
+                            <div class="row mt-3">
+                                <div class="col-xxl-6">
+                                    <div class="col-11 mt-3">
+                                        <label th:text="#{make.addresserName}"></label>
+                                        <input type="text" id="addresser_name" name="addresser_name"
+                                               class="form-control mt-2"
+                                               th:placeholder="#{make.enterName}"
+                                               required>
+                                    </div>
+
+                                    <div class="col-11 mt-3">
+                                        <label th:text="#{make.addresserState}"></label>
+                                        <input type="text" id="addresser_state" name="addresser_state"
+                                               class="form-control mt-2"
+                                               th:placeholder="#{make.enterState}"
+                                               required>
+                                    </div>
+
+                                    <div class="col-11 mt-3">
+                                        <label th:text="#{make.addresserCity}"></label>
+                                        <input type="text" id="addresser_city" name="addresser_city"
+                                               class="form-control mt-2"
+                                               th:placeholder="#{make.cityOfDeparture}"
+                                               required>
+                                    </div>
+
+                                    <div class="col-11 mt-3">
+                                        <label th:text="#{make.addresserAddress}"></label>
+                                        <input type="text" id="addresser_address" name="addresser_address"
+                                               class="form-control mt-2"
+                                               th:placeholder="#{make.departureAddress}"
+                                               required>
+                                    </div>
+
+                                    <div class="col-11 mt-3">
+                                        <label th:text="#{make.addresserPostalCode}"></label>
+                                        <input type="number" id="addresser_postalCode" name="addresser_postal_code"
+                                               class="form-control mt-2"
+                                               th:placeholder="#{make.postalCode}"
+                                               required>
+                                    </div>
+
+                                    <div class="col-11 mt-3">
+                                        <label th:text="#{make.addresserEmail}"></label>
+                                        <input type="text" id="addresser_email" name="addresser_email"
+                                               class="form-control mt-2"
+                                               th:placeholder="#{make.email}"
+                                               required>
+                                    </div>
+
+                                    <div class="col-11 mt-3">
+                                        <label th:text="#{make.addresserPhone}"></label>
+                                        <input type="text" id="addresser_phoneNumber" name="addresser_phoneNumber"
+                                               class="form-control mt-2"
+                                               th:placeholder="#{make.phoneNumber}"
+                                               required>
+                                    </div>
+                                </div>
+
+                                <div class="col-xxl-6">
+                                    <div class="col-11 offset-1 mt-3">
+                                        <label th:text="#{make.receiverName}"></label>
+                                        <input type="text" id="receiver_name" name="receiver_name"
+                                               class="form-control mt-2"
+                                               th:placeholder="#{make.enterName}"
+                                               required>
+                                    </div>
+
+                                    <div class="col-11 offset-1 mt-3">
+                                        <label th:text="#{make.receiverCity}"></label>
+                                        <input type="text" id="receiver_city" name="receiver_city"
+                                               class="form-control mt-2"
+                                               th:placeholder="#{make.deliveryCity}"
+                                               required>
+                                    </div>
+
+                                    <div class="col-11 offset-1 mt-3">
+                                        <label th:text="#{make.receiverAddress}"></label>
+                                        <input type="text" id="receiver_address" name="receiver_address"
+                                               class="form-control mt-2"
+                                               th:placeholder="#{make.deliveryAddress}"
+                                               required>
+                                    </div>
+
+                                    <div class="col-11 offset-1 mt-3">
+                                        <label th:text="#{make.receiverPostalCode}"></label>
+                                        <input type="number" id="receiver_postalCode" name="receiver_postal_code"
+                                               class="form-control mt-2"
+                                               th:placeholder="#{make.postalCode}"
+                                               required>
+                                    </div>
+
+                                    <div class="col-11 offset-1 mt-3">
+                                        <label th:text="#{make.receiverEmail}"></label>
+                                        <input type="text" id="receiver_email" name="receiver_email"
+                                               class="form-control mt-2"
+                                               th:placeholder="#{make.email}"
+                                               required>
+                                    </div>
+
+                                    <div class="col-11 offset-1 mt-3">
+                                        <label th:text="#{make.receiverPhone}"></label>
+                                        <input type="number" id="receiver_phoneNumber" name="receiver_phoneNumber"
+                                               class="form-control mt-2"
+                                               th:placeholder="#{make.phoneNumber}"
+                                               required>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-7 mx-auto" id="productPage">
+                                <div class="col-lg-12 mt-3 text-center">
+                                    <h4 th:text="#{make.productDetails}"></h4>
+                                </div>
+
+                                <div class="col-md-12 mt-3">
+                                    <label th:text="#{make.productName}"></label>
+                                    <input type="text" id="namee" name="name" class="form-control mt-2"
+                                           th:placeholder="#{make.name}" required>
+                                </div>
+
+                                <div class="col-md-12 mt-3">
+                                    <label th:text="#{make.productDescription}"></label>
+                                    <textarea class="form-control mt-2" id="description" name="description" rows="4"
+                                              th:placeholder="#{make.description}"
+                                              required></textarea>
+                                </div>
+
+                                <div class="col-md-12 mt-3">
+                                    <label th:text="#{make.productType}"></label>
+                                    <select id="typeId" type="text" name="typeId" class="form-select mt-2">
+                                        <option value="-1" th:text="#{make.chooseType}"></option>
+                                        <option th:each="pr : ${productTypes}" th:value="${pr.getId()}"
+                                                th:text="${pr.getProductType()}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="container">
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <label th:text="#{make.height}"></label>
+                                            <input type="number" name="height" th:placeholder="#{make.height}"
+                                                   class="form-control mt-2" id="height">
+                                        </div>
+                                        <div class="col">
+                                            <label th:text="#{make.width}"></label>
+                                            <input type="number" name="width" th:placeholder="#{make.width}"
+                                                   class="form-control mt-2" id="width">
+                                        </div>
+                                        <div class="col">
+                                            <label th:text="#{make.length}"></label>
+                                            <input type="number" name="length" th:placeholder="#{make.length}"
+                                                   class="form-control mt-2" id="len">
+                                        </div>
+                                        <div class="col">
+                                            <label th:text="#{make.weight}"></label>
+                                            <input type="number" name="weight" th:placeholder="#{make.weight}"
+                                                   class="form-control mt-2" id="weight">
+                                        </div>
+                                        <div class="col">
+                                            <label th:text="#{make.distance}"></label>
+                                            <input type="number" name="dist" th:placeholder="#{make.distance}"
+                                                   class="form-control mt-2" id="dist">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mt-3">
+                                    <label th:text="#{make.transportType}"></label>
+                                    <select type="text" id="transportId" class="form-select mt-2" name="transport.id"
+                                            placeholder="Phone"
+                                            required>
+                                        <option value="-1" th:text="#{make.chooseType}"></option>
+                                        <option th:each="tr : ${transports}" th:value="${tr.id}" th:text="${tr.type}">
+                                            Car
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12 mt-3 text-center mb-5">
+                                    <button id="calcFormSubmit" type="button" class="btn btn-success"
+                                            th:text="#{make.makeanorder}"></button>
+                                    <button type="reset" class="btn btn-secondary" th:text="#{make.reset}"></button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"
+                 data-bs-delay="10000">
+                <div class="toast-header">
+
+                    <strong class="me-auto">Logis</strong>
+                    <small></small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Your request add successfully!!!
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script th:src="@{'/add-request.js'}"></script>
+
+</body>
+
+</html>

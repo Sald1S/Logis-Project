@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<body layout:fragment="mainContent">
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/page-header.jpg');">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h2>Calculator</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li>Calculator</li>
+                </ol>
+            </div>
+        </nav>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Get a Quote Section ======= -->
+    <section id="get-a-quote" class="get-a-quote">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row g-0">
+
+                <div class="col-lg-7 mx-auto">
+                    <form class="input-group">
+                        <div class="text-center">
+                            <h3>Calculator</h3>
+                        </div>
+                        <div class="row gy-4 mt-3">
+
+                            <div class="col-md-12">
+                                <select id="typeId" type="text" name="typeId" class="form-select"
+                                        placeholder="Type of product">
+                                    <option th:each="pr : ${productTypes}" th:value="${pr.getId()}"
+                                            th:text="${pr.getProductType()}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col mt-2">Height<input type="number" name="height"
+                                                                       class="form-control" id="height"></div>
+                                    <div class="col mt-2">Width<input type="number" name="width"
+                                                                      class="form-control" id="width"></div>
+                                    <div class="col mt-2">Length<input type="number" name="length"
+                                                                       class="form-control" id="len"></div>
+                                    <div class="col mt-2">Weight<input type="number" name="weight"
+                                                                       class="form-control" id="weight"></div>
+                                    <div class="col mt-2">dist<input type="number" name="dist"
+                                                                     class="form-control" id="dist"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <select id="transportId" type="text" class="form-select" name="transport.id"
+                                        placeholder="Phone"
+                                        required>
+                                    <option value="-1">Choose transport</option>
+                                    <option th:each="tr : ${transports}" th:value="${tr.id}" th:text="${tr.type}">Car
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12 text-center">
+                                <button id="calcFormSubmit" type="button">Get a quote</button>
+                            </div>
+
+
+                            <div id="calculatedPrice" class="mt-4 fs-3 text-dark">
+
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <script>
+                    calcFormSubmit.addEventListener('click', calc);
+
+                    function calc(){
+                        // let calcHeight = height.value;
+                        // console.log(calcHeight)
+                        // let calcWidth = width.value;
+                        // console.log(calcWidth)
+                        // let calcLength = len.value;
+                        // console.log(calcLength)
+                        // let calcWeight = weight.value;
+                        // console.log(calcWeight)
+                        let calcDist = dist.value;
+                        console.log(calcDist)
+                        let calcTypeId = typeId.value;
+                        console.log(calcTypeId)
+                        let calcTransportId = transportId.value;
+                        console.log(calcTransportId)
+
+                        let size = {"height" : height.value, "width" : width.value, "length" : len.value, "weight" : weight.value}
+                        let body = JSON.stringify(size);
+                        console.log(body);
+                        var price = new XMLHttpRequest();
+                        price.open('POST', '/price/'+ calcTypeId + '/' + calcTransportId + '/' + calcDist, true)
+                        price.setRequestHeader("Content-Type", "application/json");
+                        price.onload = function () {
+                            if (price.status >= 200 && price.status < 400) {
+                                var data = JSON.parse(price.responseText);
+                                let some = "";
+                                some+="<div class='row'>"
+                                some+="<div class='col-12'>"
+                                some+="<p>"+"Price: "+data+" Tenge"+"</p>"
+                                some+="</div>"
+                                some+="</div>"
+                                calculatedPrice.innerHTML = some;
+                            }
+                            // else {
+                            //     console.log("We connected to the server, but it returned an error");
+                            // }
+                        }
+                        price.onerror = function () {
+                            console.log("Connection error");
+                        }
+                        price.send(body);
+                    }
+                    </script>
+                </div><!-- End Quote Form -->
+
+            </div>
+
+        </div>
+    </section><!-- End Get a Quote Section -->
+
+</main><!-- End #main -->
+
+</body>
+
+</html>
+
+<!--<script>-->
+
+<!--    calcFormSubmit.addEventListener('click', calc);-->
+
+<!--    function calc(){-->
+<!--        let calcHeight = height.value;-->
+<!--        console.log(calcHeight)-->
+<!--        let calcWidth = width.value;-->
+<!--        console.log(calcWidth)-->
+<!--        let calcLength = len.value;-->
+<!--        console.log(calcLength)-->
+<!--        let calcWeight = weight.value;-->
+<!--        console.log(calcWeight)-->
+<!--        let calcDist = dist.value;-->
+<!--        console.log(calcDist)-->
+<!--        let calcTypeId = typeId.value;-->
+<!--        console.log(calcTypeId)-->
+<!--        let calcTransportId = transportId.value;-->
+<!--        console.log(calcTransportId)-->
+<!--        var price = new XMLHttpRequest();-->
+<!--        price.open('POST', '/price/' + calcHeight + '/' + calcWidth + '/' + calcLength + '/' + calcWeight + '/' + calcTypeId + '/' + calcTransportId + '/' + calcDist, true)-->
+<!--        price.setRequestHeader("Content-Type", "application/json");-->
+<!--        price.onload = function () {-->
+<!--            if (price.status >= 200 && price.status < 400) {-->
+<!--                var data = JSON.parse(price.responseText);-->
+<!--                console.log(data)-->
+<!--                calculatedPrice.innerHTML = data;-->
+<!--            } else {-->
+<!--                console.log("We connected to the server, but it returned an error");-->
+<!--            }-->
+<!--        }-->
+<!--        price.onerror = function () {-->
+<!--            console.log("Connection error");-->
+<!--        }-->
+<!--        price.send();-->
+<!--    }-->
+
+<!--</script>-->

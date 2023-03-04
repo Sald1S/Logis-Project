@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<body layout:fragment="mainContent">
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/page-header.jpg');">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h2>Login</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li>Login</li>
+                </ol>
+            </div>
+        </nav>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Login Section ======= -->
+    <section id="get-a-quote" class="get-a-quote">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row g-0">
+
+                <div class="col-lg-7 mx-auto">
+                    <form th:action="@{'/signup'}" method="post">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${param.passwordError!=null}">
+                        Passwords are not same!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${param.userError!=null}">
+                        Email is busy!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${param.success!=null}">
+                        Account created successfully!®
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="text" class="form-control" name="user_full_name" >
+                        <label class="form-label" >Full name</label>
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input type="email" class="form-control" name="user_email" >
+                        <label class="form-label" >Email address</label>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input type="password" class="form-control" name="user_password">
+                        <label class="form-label">Password</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="password" class="form-control" name="user_re_password">
+                        <label class="form-label">re-Password</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="text" class="form-control" name="user_country">
+                        <label class="form-label">Country</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="text" class="form-control" name="user_address">
+                        <label class="form-label">Address</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="text" class="form-control" name="user_company">
+                        <label class="form-label">Company</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="number" class="form-control" name="user_phone_number">
+                        <label class="form-label">Phone number</label>
+                    </div>
+
+                    <button class="btn btn-primary btn-block mb-4">Sign Up</button>
+                    </form>
+                </div><!-- End Quote Form -->
+
+            </div>
+
+        </div>
+    </section><!-- End Get a Quote Section -->
+
+</main><!-- End #main -->
+
+</body>
+
+</html>

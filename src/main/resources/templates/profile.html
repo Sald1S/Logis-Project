@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<body layout:fragment="mainContent">
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/page-header.jpg');">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h2 th:text="#{profile.profile}"></h2>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ol>
+                    <li><a th:href="@{'/'}" th:text="#{nav.home}"></a></li>
+                    <li th:text="#{profile.profile}"></li>
+                </ol>
+            </div>
+        </nav>
+    </div><!-- End Breadcrumbs -->
+
+
+    <div id="liveAlertPlaceholder"></div>
+
+    <section class="section container profile">
+        <div class="row">
+            <div class="col-xl-4">
+
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <form th:action="@{'/updatePic'}" method="post" enctype="multipart/form-data">
+                            <label style="cursor: pointer">
+                                <img th:src="@{'/profile/'+${#authentication.principal.picture!=null?#authentication.principal.picture:'default.jpg'}}" alt="Profile" class="rounded-circle w-100">
+                                <input type="file" onchange="this.form.submit()" name="avatar" style="display:none">
+                            </label>
+                        </form>
+                        <h2 th:text="${#authentication.principal.full_name}"></h2>
+                        <h3>Web Designer</h3>
+                        <div class="social-links mt-2">
+                            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xl-8">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview"
+                                th:text="#{profile.overview}"></button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit"
+                                        th:text="#{profile.editProfile}"></button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings"
+                                        th:text="#{profile.setting}"></button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password"
+                                        th:text="#{profile.changePassword}"></button>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content pt-2">
+
+                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                                <h5 class="card-title" th:text="#{profile.profileDetails}"></h5>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label " th:text="#{profile.fullName}"></div>
+                                    <div class="col-lg-9 col-md-8" th:text="${#authentication.principal.full_name}"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label" th:text="#{profile.company}"></div>
+                                    <div class="col-lg-9 col-md-8" th:text="${#authentication.principal.company}"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label" th:text="#{profile.country}"></div>
+                                    <div class="col-lg-9 col-md-8" th:text="${#authentication.principal.country}"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label" th:text="#{profile.address}"></div>
+                                    <div class="col-lg-9 col-md-8" th:text="${#authentication.principal.address}"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label" th:text="#{profile.phone}"></div>
+                                    <div class="col-lg-9 col-md-8" th:text="${#authentication.principal.phoneNumber}"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label" th:text="#{profile.email}"></div>
+                                    <div class="col-lg-9 col-md-8" th:text="${#authentication.principal.email}"></div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                                <!-- Profile Edit Form -->
+                                <form>
+
+                                    <div class="row mb-3">
+                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label" th:text="#{profile.fullName}"></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="fullName" type="text" class="form-control" id="full_name" th:value="${#authentication.principal.full_name}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="company" class="col-md-4 col-lg-3 col-form-label" th:text="#{profile.company}"></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="company" type="text" class="form-control" id="company" th:value="${#authentication.principal.company}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label" th:text="#{profile.country}"></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="country" type="text" class="form-control" id="country" th:value="${#authentication.principal.country}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Address" class="col-md-4 col-lg-3 col-form-label" th:text="#{profile.address}"></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="address" type="text" class="form-control" id="address" th:value="${#authentication.principal.address}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Phone" class="col-md-4 col-lg-3 col-form-label" th:text="#{profile.phone}"></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="phone" type="text" class="form-control" id="phoneNumber" th:value="${#authentication.principal.phoneNumber}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Email" class="col-md-4 col-lg-3 col-form-label" th:text="#{profile.email}"></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="email" type="email" class="form-control" id="Email" th:value="${#authentication.principal.email}" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="button" id="userUpdateSubmit" class="btn btn-primary" th:text="#{profile.saveChanges}"></button>
+                                    </div>
+                                </form><!-- End Profile Edit Form -->
+
+                            </div>
+
+                            <div class="tab-pane fade pt-3" id="profile-settings">
+
+                                <!-- Settings Form -->
+                                <form>
+
+                                    <div class="row mb-3">
+                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="changesMade" checked>
+                                                <label class="form-check-label" for="changesMade">
+                                                    Changes made to your account
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="newProducts" checked>
+                                                <label class="form-check-label" for="newProducts">
+                                                    Information on new products and services
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="proOffers">
+                                                <label class="form-check-label" for="proOffers">
+                                                    Marketing and promo offers
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
+                                                <label class="form-check-label" for="securityNotify">
+                                                    Security alerts
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary" th:text="#{profile.saveChanges}"></button>
+                                    </div>
+                                </form><!-- End settings Form -->
+
+                            </div>
+
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${param.oldPasswordError!=null}">
+                                Wrong old password!
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${param.passwordError!=null}">
+                                Passwords are not the same!
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+                            <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${param.success!=null}">
+                                Password changed successfully!®
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <div class="tab-pane fade pt-3" id="profile-change-password">
+                                <!-- Change Password Form -->
+                                <form th:action="@{'/updatePassword'}" method="post">
+
+                                    <div class="row mb-3">
+                                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label" th:text="#{profile.currentPassword}"></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="oldPass" type="password" class="form-control" id="currentPassword">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label" th:text="#{profile.newPassword}"></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="newPass" type="password" class="form-control" id="newPassword">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label" th:text="#{profile.reNewPassword}"></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="reNewPass" type="password" class="form-control" id="renewPassword">
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary" th:text="#{profile.changePassword}"></button>
+                                    </div>
+                                </form><!-- End Change Password Form -->
+
+                            </div>
+
+                        </div><!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+<script th:src="@{'/user-update.js'}"></script>
+</body>
+
+</html>
